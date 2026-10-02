@@ -1,0 +1,1669 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hoja de ruta · Las deudas de la ciudad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;1,6..96,500;1,6..96,700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ===== Tokens: noche (oscuro) ===== */
+:root{
+  --bg:#0f0e0d; --bg-2:#171514; --ink:#ebe5d8; --muted:#9a9388; --faint:#5f5a53; --line:#34302b;
+  --surface:rgba(22,20,19,.82); --surface-2:rgba(38,35,32,.7);
+  --paper:#e6decd; --paper-ink:#1b1917; --paper-muted:#5d564c; --paper-line:#cbbfa6;
+  --red:#c4262e; --red-soft:#e04a4f; --silver:#c9c3b8;
+  --blind:rgba(255,248,230,.045); --lamp:rgba(255,238,205,.14); --grain:.10;
+  --display:"Bodoni Moda","Didot","Bodoni 72","Playfair Display",Georgia,serif;
+  --type:"Courier Prime","Courier New",Courier,monospace;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#e7e1d4; --bg-2:#ddd5c5; --ink:#141312; --muted:#57524a; --faint:#8b8478; --line:#bdb3a0;
+    --surface:rgba(244,240,231,.86); --surface-2:rgba(226,219,204,.8);
+    --paper:#f7f2e6; --paper-ink:#1b1917; --paper-muted:#5d564c; --paper-line:#d6cbb3;
+    --red:#b01f27; --red-soft:#b01f27; --silver:#3a3631;
+    --blind:rgba(20,16,10,.07); --lamp:rgba(255,255,255,.55); --grain:.08;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#e7e1d4; --bg-2:#ddd5c5; --ink:#141312; --muted:#57524a; --faint:#8b8478; --line:#bdb3a0;
+  --surface:rgba(244,240,231,.86); --surface-2:rgba(226,219,204,.8);
+  --paper:#f7f2e6; --paper-ink:#1b1917; --paper-muted:#5d564c; --paper-line:#d6cbb3;
+  --red:#b01f27; --red-soft:#b01f27; --silver:#3a3631;
+  --blind:rgba(20,16,10,.07); --lamp:rgba(255,255,255,.55); --grain:.08;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--type);font-size:15.5px;line-height:1.6;-webkit-font-smoothing:antialiased;position:relative;min-height:100%}
+/* Ambiente: foco de lámpara, persianas, grano y viñeta (fijos, detrás del contenido) */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 55% at 62% 18%, var(--lamp), transparent 70%),
+    repeating-linear-gradient(-28deg, var(--blind) 0 34px, transparent 34px 78px);
+  -webkit-mask-image:radial-gradient(ellipse 90% 80% at 60% 20%, #000 35%, transparent 85%);
+          mask-image:radial-gradient(ellipse 90% 80% at 60% 20%, #000 35%, transparent 85%)}
+body::after{content:"";position:fixed;inset:-50%;z-index:60;pointer-events:none;opacity:var(--grain);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation:grain 1.2s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 40%, transparent 55%, rgba(0,0,0,.55) 100%)}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .vignette{background:radial-gradient(ellipse at 50% 40%, transparent 60%, rgba(60,45,25,.18) 100%)}}
+:root[data-theme="light"] .vignette{background:radial-gradient(ellipse at 50% 40%, transparent 60%, rgba(60,45,25,.18) 100%)}
+header.top,main,.foot-wrap{position:relative;z-index:2}
+img,svg{max-width:100%}
+button{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--red-soft);outline-offset:3px;border-radius:2px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 22px}
+
+/* ===== Cabecera: cartel de película ===== */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:linear-gradient(var(--bg),color-mix(in srgb,var(--bg) 88%,transparent));backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.top-in{display:flex;align-items:center;gap:24px;min-height:70px;flex-wrap:wrap;padding-top:10px;padding-bottom:8px}
+.brand{display:flex;flex-direction:column;line-height:1}
+.brand b{font-family:var(--display);font-style:italic;font-weight:700;font-size:27px;letter-spacing:.2px}
+.brand span{font-family:var(--type);font-size:13px;color:var(--muted);margin-top:5px;letter-spacing:.5px}
+.tabs{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
+.tab{background:none;border:0;border-bottom:2px solid transparent;padding:10px 12px 7px;font-family:var(--type);font-weight:700;font-size:15px;color:var(--muted);cursor:pointer;letter-spacing:.3px}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--red)}
+
+main.wrap{padding:46px 22px 40px}
+.view[hidden]{display:none}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.02;margin:0;letter-spacing:-.2px}
+h1{font-style:italic}
+.lede{color:var(--muted);max-width:64ch;margin:10px 0 0;font-size:15px}
+
+/* Apertura de película: la primera pantalla aparece desde negro */
+.fade-in{animation:iris 1.6s cubic-bezier(.2,.7,.2,1) both}
+@keyframes iris{from{opacity:0;filter:brightness(0) contrast(1.4)}to{opacity:1;filter:none}}
+
+/* ===== Línea de tranvía ===== */
+.line-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.line-head h1{font-size:clamp(46px,7.4vw,96px);text-shadow:0 2px 30px rgba(0,0,0,.35)}
+.updated{font-size:13px;color:var(--muted)}
+.route{position:relative;margin:38px 0 8px;padding:66px 0 0}
+.route ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,1fr);position:relative}
+.route ol::before{content:"";position:absolute;left:calc(100%/14);right:calc(100%/14);top:8px;height:16px;background:repeating-linear-gradient(90deg,var(--faint) 0 2px,transparent 2px 13px);opacity:.8}
+.route ol::after{content:"";position:absolute;left:calc(100%/14);right:calc(100%/14);top:14px;height:4px;background:var(--silver);box-shadow:0 0 0 1px rgba(0,0,0,.25)}
+.stop{position:relative;text-align:center;padding:0 4px}
+.stop button{background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:12px;width:100%}
+.dot{width:30px;height:30px;border-radius:50%;background:var(--bg);border:3px solid var(--silver);position:relative;z-index:1;display:grid;place-items:center;transition:transform .15s}
+.stop button:hover .dot{transform:scale(1.1)}
+.stop.done .dot{background:var(--silver)}
+.stop.done .dot::after{content:"";width:9px;height:5px;border-left:2.5px solid var(--bg);border-bottom:2.5px solid var(--bg);transform:rotate(-45deg) translate(1px,-1px)}
+.stop.future .dot{border-style:dotted;border-color:var(--faint)}
+.stop.current .dot{background:var(--red);border-color:var(--ink);box-shadow:0 0 0 6px color-mix(in srgb,var(--red) 22%,transparent),0 0 26px 4px color-mix(in srgb,var(--red) 45%,transparent)}
+.stop .txt{display:flex;flex-direction:column;align-items:center;gap:1px}
+.stop .code{font-family:var(--type);font-size:12.5px;color:var(--muted);letter-spacing:.4px}
+.stop .name{font-family:var(--display);font-style:italic;font-weight:700;font-size:20px;line-height:1.05;max-width:14ch}
+.stop .st{font-size:12.5px;color:var(--muted)}
+.stop.future .name{color:var(--muted)}
+.stop.current .st{color:var(--red-soft)}
+.tram{position:absolute;top:0;width:86px;height:46px;transform:translateX(-50%);transition:left 1.6s cubic-bezier(.3,.7,.2,1) .5s;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,.5))}
+.tram-label{position:absolute;top:-2px;font-family:var(--display);font-style:italic;font-weight:700;font-size:16px;color:var(--red-soft);transform:translateX(-50%);white-space:nowrap;margin-top:-24px;transition:left 1.6s cubic-bezier(.3,.7,.2,1) .5s}
+@media (max-width:760px){
+  .route{padding:0}
+  .route ol{grid-template-columns:1fr;gap:0}
+  .route ol::after{left:13px;right:auto;top:26px;bottom:26px;width:4px;height:auto}
+  .route ol::before{display:none}
+  .stop{text-align:left;padding:10px 0}
+  .stop button{flex-direction:row;align-items:center;gap:14px;text-align:left}
+  .stop .txt{align-items:flex-start}
+  .stop .name{max-width:none}
+  .tram,.tram-label{display:none}
+  .stop.current .name::after{content:" · aquí estamos";color:var(--red-soft)}
+  .tabs{margin-left:0;flex-wrap:nowrap;overflow-x:auto;width:100%}
+  .tab{font-size:14px;padding:8px 9px 6px;white-space:nowrap}
+  .top-in{gap:4px}
+}
+
+/* ===== Paneles del estado ===== */
+.estado-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:22px;margin-top:34px}
+@media (max-width:900px){.estado-grid{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:2px;padding:24px 24px 20px;box-shadow:0 20px 40px -24px rgba(0,0,0,.7);backdrop-filter:blur(2px)}
+.panel h2{font-size:34px;margin-bottom:6px;font-style:italic}
+.panel h3{font-size:22px;margin:22px 0 8px;font-style:italic}
+.kicker{font-family:var(--type);font-weight:700;font-size:13px;color:var(--red-soft);margin-bottom:6px;letter-spacing:.4px}
+.meter{height:6px;background:var(--surface-2);overflow:hidden;margin:16px 0 6px;border:1px solid var(--line)}
+.meter i{display:block;height:100%;background:var(--red)}
+.meter-txt{font-size:13px;color:var(--muted)}
+.gate{margin-top:16px;padding:12px 14px;border-left:2px solid var(--red);background:var(--surface-2);font-size:14.5px}
+.gate b{font-family:var(--display);font-style:italic;font-weight:700;font-size:18px;display:block;margin-bottom:2px}
+.todo{list-style:none;padding:0;margin:0}
+.todo li{border-top:1px dashed var(--line)}
+.todo button{width:100%;text-align:left;background:none;border:0;padding:10px 2px;display:flex;gap:12px;align-items:center;cursor:pointer}
+.todo button:hover .t{text-decoration:underline;text-underline-offset:3px}
+.todo .t{flex:1}
+.sum{margin-top:26px;font-size:15.5px;max-width:74ch;color:var(--muted)}
+.sum strong{font-family:var(--display);font-style:italic;font-weight:700;font-size:22px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:12px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.news-mini time{font-size:13px;color:var(--muted)}
+.news-mini p{margin:4px 0 0}
+.linkbtn{background:none;border:0;padding:0;color:var(--red-soft);font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:4px}
+
+/* ===== Sellos (tinta de expediente) ===== */
+.stamp{display:inline-block;font-family:var(--type);font-weight:700;font-size:11.5px;letter-spacing:1.4px;text-transform:uppercase;padding:1px 7px 0;border:1.5px solid currentColor;border-radius:2px;line-height:1.6;white-space:nowrap}
+.s-hecho{color:var(--silver)} .s-en_curso{color:var(--red-soft)} .s-planificado{color:var(--muted);border-style:solid;opacity:.9} .s-por_decidir{color:var(--muted);border-style:dashed}
+.card .stamp,.drawer .stamp{transform:rotate(-2deg)}
+.card .s-hecho,.drawer .s-hecho{color:#1b1917;background:rgba(27,25,23,.06)} .card .s-en_curso,.drawer .s-en_curso{color:#a81f26}
+.card .s-planificado,.drawer .s-planificado{color:#6a6255} .card .s-por_decidir,.drawer .s-por_decidir{color:#6a6255}
+
+/* ===== Filtros ===== */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:26px 0 16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:2px;padding:4px 11px 3px 9px;font-size:13.5px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;color:var(--muted)}
+.chip:hover{color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip .sw,.sw{width:9px;height:9px;border-radius:50%;display:inline-block}
+.search{border:0;border-bottom:1px solid var(--muted);background:transparent;padding:6px 2px;font:inherit;font-size:14.5px;color:var(--ink);min-width:230px}
+.search::placeholder{color:var(--faint);font-style:italic}
+.reset{margin-left:auto}
+.count-note{font-size:13.5px;color:var(--muted)}
+
+/* ===== Columnas por hito: carpetas sobre la mesa ===== */
+.board{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(295px,1fr);gap:18px;overflow-x:auto;padding:4px 2px 18px;scroll-snap-type:x proximity}
+.col{scroll-snap-align:start;background:var(--surface);border:1px solid var(--line);border-radius:2px;display:flex;flex-direction:column;min-width:0;box-shadow:0 24px 40px -28px rgba(0,0,0,.8)}
+.col.current{border-color:var(--red);box-shadow:0 0 0 1px var(--red),0 24px 50px -24px color-mix(in srgb,var(--red) 40%,transparent)}
+.col-head{padding:16px 16px 14px;border-bottom:1px solid var(--line)}
+.col-head .code{font-family:var(--type);color:var(--muted);font-size:12.5px;letter-spacing:.4px}
+.col.current .col-head .code{color:var(--red-soft)}
+.col-head h2{font-size:28px;margin:4px 0 8px;font-style:italic}
+.col-head p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.5}
+.col-head .meter{margin:12px 0 5px;height:4px}
+.col-body{padding:12px 12px 16px;display:flex;flex-direction:column;gap:10px}
+.grp{font-family:var(--type);font-weight:700;font-size:12.5px;color:var(--muted);margin:10px 2px 0;display:flex;align-items:center;gap:7px;letter-spacing:.3px}
+.grp:first-child{margin-top:2px}
+.empty{font-size:13.5px;color:var(--muted);padding:10px 2px;font-style:italic}
+
+/* ===== Fichas: documentos mecanografiados ===== */
+.card{position:relative;text-align:left;width:100%;background:var(--paper);color:var(--paper-ink);border:0;border-radius:1px;padding:14px 14px 12px 18px;cursor:pointer;
+  box-shadow:0 1px 0 rgba(0,0,0,.25),0 14px 24px -14px rgba(0,0,0,.85);
+  background-image:linear-gradient(180deg,rgba(255,255,255,.35),transparent 40%),radial-gradient(ellipse at 90% 110%,rgba(120,95,55,.16),transparent 60%);
+  transition:transform .18s ease, box-shadow .18s ease}
+.card:nth-child(3n){transform:rotate(-.35deg)} .card:nth-child(3n+1){transform:rotate(.3deg)}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--cat)}
+.card::after{content:"";position:absolute;top:-6px;right:18px;width:12px;height:26px;border:2px solid #8e8a82;border-radius:6px;border-bottom-color:transparent;opacity:.0}
+.card:hover{transform:translateY(-2px) rotate(0deg);box-shadow:0 1px 0 rgba(0,0,0,.25),0 22px 30px -14px rgba(0,0,0,.9)}
+.card .ct{font-family:var(--display);font-weight:700;font-size:19px;line-height:1.12;display:block}
+.card .cs{display:block;font-family:var(--type);font-size:13px;line-height:1.5;color:var(--paper-muted);margin-top:6px}
+.card .cf{display:flex;align-items:center;gap:10px;margin-top:10px}
+.card .mini{flex:1;height:3px;background:rgba(0,0,0,.12);overflow:hidden}
+.card .mini i{display:block;height:100%;background:#a81f26}
+.card .pct{font-size:12px;color:var(--paper-muted)}
+
+/* ===== Seguimiento ===== */
+.seg-top{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:26px 0 16px}
+.seg-toggle{display:inline-flex;border:1px solid var(--line)}
+.seg-toggle button{background:var(--surface);border:0;padding:8px 14px;cursor:pointer;font-family:var(--type);font-weight:700;font-size:14px;color:var(--muted)}
+.seg-toggle button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.gantt-wrap{overflow-x:auto;border:1px solid var(--line);background:var(--surface);box-shadow:0 24px 40px -28px rgba(0,0,0,.8)}
+.gantt{display:grid;grid-template-columns:minmax(230px,310px) repeat(7,minmax(92px,1fr));min-width:990px;position:relative}
+.gh{position:sticky;top:0;background:var(--bg-2);font-family:var(--display);font-style:italic;font-weight:700;font-size:17px;padding:10px 9px;border-bottom:1px solid var(--line);z-index:2}
+.gh.cur{color:var(--red-soft)}
+.gh small{display:block;font-family:var(--type);font-style:normal;font-weight:400;color:var(--muted);font-size:12px;line-height:1.2;margin-top:2px}
+.gl{position:sticky;left:0;background:var(--bg-2);z-index:1;padding:8px 10px;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.3;display:flex;align-items:center;gap:8px}
+.gl button{background:none;border:0;padding:0;text-align:left;cursor:pointer}
+.gl button:hover{text-decoration:underline;text-underline-offset:3px}
+.gc{border-bottom:1px solid var(--line);border-left:1px dotted var(--line);min-height:38px}
+.gc.cur{background:color-mix(in srgb,var(--red) 7%,transparent)}
+.gcat{grid-column:1 / -1;font-family:var(--display);font-style:italic;font-weight:700;font-size:21px;padding:14px 10px 6px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:9px;background:var(--bg-2);position:sticky;left:0}
+.bar{align-self:center;height:20px;margin:0 6px;border-radius:1px;cursor:pointer;border:0;position:relative;display:flex;align-items:center;padding:0 8px;font-family:var(--type);font-size:11.5px;font-weight:700;letter-spacing:.3px;overflow:hidden;white-space:nowrap}
+.bar.hecho{background:var(--silver);color:var(--bg)}
+.bar.en_curso{background:var(--red);color:#fff}
+.bar.planificado{background:transparent;border:1px solid var(--muted);color:var(--muted)}
+.bar.por_decidir{background:transparent;border:1px dashed var(--faint);color:var(--faint)}
+.bar.en_curso::after{content:"";position:absolute;right:0;top:0;bottom:0;width:calc(100% - var(--p));background:repeating-linear-gradient(135deg,rgba(0,0,0,.28) 0 5px,transparent 5px 10px)}
+.area-cell{display:flex;align-items:center;gap:3px;padding:0 8px;flex-wrap:wrap}
+.pip{width:11px;height:11px;border:1.5px solid var(--muted)}
+.pip.hecho{background:var(--silver);border-color:var(--silver)}
+.pip.en_curso{background:var(--red);border-color:var(--red)}
+.pip.por_decidir{border-style:dashed;border-color:var(--faint)}
+.area-n{font-size:12px;color:var(--muted);margin-left:4px}
+
+/* ===== Novedades: crónica de periódico ===== */
+.news{max-width:780px;margin-top:26px}
+.entry{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:22px 0;border-top:1px solid var(--line)}
+@media (max-width:620px){.entry{grid-template-columns:1fr;gap:4px}}
+.entry time{font-family:var(--type);font-size:13.5px;color:var(--muted);padding-top:6px}
+.entry h2{font-size:30px;margin-bottom:8px;font-style:italic}
+.entry ul{margin:0;padding-left:18px}
+.entry li{margin:4px 0}
+.entry li::marker{color:var(--red-soft)}
+
+/* ===== Ficha de detalle: carpeta del caso ===== */
+.scrim{position:fixed;inset:0;background:rgba(5,4,3,.68);z-index:40;backdrop-filter:blur(2px) grayscale(.6)}
+.scrim[hidden]{display:none}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(540px,100%);z-index:41;background:var(--paper);color:var(--paper-ink);box-shadow:-30px 0 60px -20px rgba(0,0,0,.85);overflow-y:auto;
+  padding:calc(env(safe-area-inset-top,0px) + 26px) 30px calc(env(safe-area-inset-bottom,0px) + 30px);transform:translateX(0);transition:transform .3s ease;
+  background-image:linear-gradient(180deg,rgba(255,255,255,.4),transparent 30%),radial-gradient(ellipse at 100% 100%,rgba(120,95,55,.2),transparent 55%)}
+.drawer[hidden]{display:block;transform:translateX(105%);visibility:hidden}
+.drawer::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--cat)}
+.drawer .tabcat{display:inline-flex;align-items:center;gap:8px;font-family:var(--type);font-weight:700;font-size:13px;color:var(--paper-muted);letter-spacing:.3px}
+.drawer .tabcat i{width:9px;height:9px;border-radius:50%;background:var(--cat)}
+.drawer h2{font-size:38px;margin:10px 0 10px;color:var(--paper-ink);font-style:italic}
+.drawer .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:13.5px;color:var(--paper-muted)}
+.drawer h3{font-family:var(--display);font-style:italic;font-weight:700;font-size:20px;margin:22px 0 4px;color:var(--paper-ink)}
+.drawer p{margin:0;font-size:14.5px}
+.drawer .meter{background:rgba(0,0,0,.08);border-color:var(--paper-line)}
+.drawer .meter i{background:#a81f26}
+.drawer .deps{list-style:none;padding:0;margin:0}
+.drawer .deps li{padding:3px 0}
+.drawer .deps button{background:none;border:0;padding:0;cursor:pointer;color:#8e1c22;text-decoration:underline;text-underline-offset:3px;text-align:left;font-size:14px}
+.close{position:absolute;top:calc(env(safe-area-inset-top,0px) + 16px);right:18px;background:none;border:1px solid var(--paper-line);border-radius:1px;padding:4px 10px;cursor:pointer;font-family:var(--type);font-weight:700;font-size:13.5px;color:var(--paper-ink)}
+.stamp-big{font-size:15px;padding:3px 11px 1px;border-width:2.5px;margin:2px 0 14px;transform:rotate(-5deg) !important;letter-spacing:2.5px}
+
+.foot{border-top:1px solid var(--line);padding:20px 0 10px;font-size:13px;color:var(--muted);font-style:italic}
+@media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}}
+</style>
+</head>
+<body>
+<div class="vignette" aria-hidden="true"></div>
+<header class="top">
+  <div class="wrap top-in">
+    <div class="brand"><b>Las deudas de la ciudad</b><span>Hoja de ruta del desarrollo</span></div>
+    <nav class="tabs" role="tablist" aria-label="Secciones">
+      <button class="tab" role="tab" data-view="estado">Estado</button>
+      <button class="tab" role="tab" data-view="hitos">Por hitos</button>
+      <button class="tab" role="tab" data-view="seguimiento">Seguimiento</button>
+      <button class="tab" role="tab" data-view="novedades">Novedades</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- ESTADO -->
+  <section class="view fade-in" id="view-estado" aria-labelledby="t-estado">
+    <div class="line-head">
+      <div>
+        <h1 id="t-estado">¿Dónde estamos?</h1>
+        <p class="lede">El proyecto avanza como un tranvía Red Car: siete paradas, y no se sale de una hasta cumplir su condición. Pulsa una parada para ver todo lo que hay en ella.</p>
+      </div>
+      <div class="updated" id="updated"></div>
+    </div>
+    <div class="route" id="route"></div>
+    <div class="estado-grid">
+      <div class="panel" id="now-panel"></div>
+      <div>
+        <div class="panel" id="next-panel"></div>
+        <div class="panel news-mini" id="news-mini" style="margin-top:20px"></div>
+      </div>
+    </div>
+    <p class="sum" id="totals"></p>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <!-- POR HITOS -->
+  <section class="view" id="view-hitos" aria-labelledby="t-hitos" hidden>
+    <h1 id="t-hitos" style="font-size:clamp(34px,5vw,54px)">Por hitos</h1>
+    <p class="lede">Cada columna es un hito y cada ficha, algo que hay que construir. Filtra por tipo de trabajo o por estado, y pulsa una ficha para ver los detalles.</p>
+    <div class="toolbar">
+      <div class="chips" id="f-cat" aria-label="Filtrar por tipo de trabajo"></div>
+      <div class="chips" id="f-st" aria-label="Filtrar por estado"></div>
+      <input class="search" id="f-q" type="search" placeholder="Buscar, por ejemplo «Agnes»" aria-label="Buscar en la hoja de ruta">
+      <button class="linkbtn reset" id="f-reset">Quitar filtros</button>
+    </div>
+    <p class="count-note" id="f-count"></p>
+    <div class="board" id="board"></div>
+  </section>
+
+  <!-- SEGUIMIENTO -->
+  <section class="view" id="view-seguimiento" aria-labelledby="t-seg" hidden>
+    <h1 id="t-seg" style="font-size:clamp(34px,5vw,54px)">Seguimiento</h1>
+    <p class="lede">Qué se trabaja en cada hito, de un vistazo. La planificación va por hitos, no por fechas: cada uno empieza cuando el anterior cumple su condición.</p>
+    <div class="seg-top">
+      <div class="seg-toggle" role="group" aria-label="Agrupar">
+        <button data-mode="items" aria-pressed="true">Por entregable</button>
+        <button data-mode="areas" aria-pressed="false">Por área</button>
+      </div>
+      <div class="legend" id="legend2" style="margin:0"></div>
+    </div>
+    <div class="gantt-wrap"><div class="gantt" id="gantt"></div></div>
+  </section>
+
+  <!-- NOVEDADES -->
+  <section class="view" id="view-novedades" aria-labelledby="t-news" hidden>
+    <h1 id="t-news" style="font-size:clamp(34px,5vw,54px)">Novedades</h1>
+    <p class="lede">Lo que ha cambiado en el proyecto, de lo más reciente a lo más antiguo.</p>
+    <div class="news" id="news"></div>
+  </section>
+
+  <p class="foot">Versión pública: enseña cómo avanza el desarrollo, sin detalles de la historia. Se actualiza cada vez que se termina algo; lo que está «por decidir» puede cambiar o desaparecer.</p>
+</main>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="d-title" hidden></aside>
+
+<script>
+/* =========================================================
+   DATOS DE LA HOJA DE RUTA — se actualizan aquí.
+   Estados: hecho · en_curso · planificado · por_decidir
+   p = progreso de 0 a 100. span = [hito inicial, hito final] si ocupa varios.
+   ========================================================= */
+const ROADMAP = {
+ "actualizado": "2 de octubre de 2026",
+ "hitos": [
+  {
+   "id": 0,
+   "nombre": "Revisión del GDD",
+   "corto": "Revisión",
+   "meta": "Cerrar el diseño: aprobar las decisiones y diseñar el caso 1.",
+   "puerta": "Decisiones aprobadas por el creador y caso 1 diseñado."
+  },
+  {
+   "id": 1,
+   "nombre": "Conversación de referencia",
+   "corto": "Conversación",
+   "meta": "Que Agnes Pruitt y Big Ed hablen como personas de verdad, fuera de Unreal.",
+   "puerta": "Naturalidad de 4 sobre 5, el 90 % de preguntas entendidas sin aclaraciones y cero filtraciones."
+  },
+  {
+   "id": 2,
+   "nombre": "Persona ocupada",
+   "corto": "Persona ocupada",
+   "meta": "El núcleo de conversación dentro de Unreal, con una Agnes que tiene su propia tarea, y el primer prototipo de pelea.",
+   "puerta": "Agnes vuelve a su tarea tras hablar y el rendimiento es aceptable."
+  },
+  {
+   "id": 3,
+   "nombre": "El comienzo en bloques",
+   "corto": "El comienzo",
+   "meta": "Union Station, la pensión, Big Ed's, el bar y el despacho, recorribles con geometría provisional.",
+   "puerta": "Los lugares se recorren y cada pista del caso 1 tiene respaldo."
+  },
+  {
+   "id": 4,
+   "nombre": "Introducción y caso 1",
+   "corto": "Introducción",
+   "meta": "La introducción y el caso 1, «El vecino de enfrente», jugables de principio a fin con arte provisional. Es el objetivo de producción.",
+   "puerta": "Tres jugadores externos lo terminan sin ayuda y se mide cuánto ha costado."
+  },
+  {
+   "id": 5,
+   "nombre": "Paquete de prueba",
+   "corto": "Paquete",
+   "meta": "Un instalable que funciona en otro PC, sin internet, con voz.",
+   "puerta": "Funciona en un PC limpio sin conexión."
+  },
+  {
+   "id": 6,
+   "nombre": "Campaña",
+   "corto": "Campaña",
+   "meta": "Los casos 2 a 5 y los secundarios, solo si el coste de la introducción y el caso 1 lo permite.",
+   "puerta": "Decisión tomada con el coste real del caso 1."
+  }
+ ],
+ "categorias": [
+  {
+   "id": "conv",
+   "nombre": "Conversación e IA",
+   "color": "#6f84a3"
+  },
+  {
+   "id": "pers",
+   "nombre": "Personajes",
+   "color": "#9b4a45"
+  },
+  {
+   "id": "narr",
+   "nombre": "Historia y casos",
+   "color": "#7c6a8c"
+  },
+  {
+   "id": "sist",
+   "nombre": "Sistemas de juego",
+   "color": "#62877b"
+  },
+  {
+   "id": "inter",
+   "nombre": "Interfaz",
+   "color": "#a88a55"
+  },
+  {
+   "id": "mundo",
+   "nombre": "Mundo y arte",
+   "color": "#86705a"
+  },
+  {
+   "id": "voz",
+   "nombre": "Voz y audio",
+   "color": "#93687f"
+  },
+  {
+   "id": "tec",
+   "nombre": "Tecnología",
+   "color": "#7d8189"
+  },
+  {
+   "id": "prod",
+   "nombre": "Producción",
+   "color": "#8d8a6a"
+  }
+ ],
+ "items": [
+  {
+   "id": "h0-gdd",
+   "h": 0,
+   "c": "prod",
+   "s": "hecho",
+   "p": 100,
+   "t": "GDD 0.2 redactado",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": ""
+  },
+  {
+   "id": "h0-pdf",
+   "h": 0,
+   "c": "prod",
+   "s": "hecho",
+   "p": 100,
+   "t": "Edición PDF con anexos",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": ""
+  },
+  {
+   "id": "h0-ideas",
+   "h": 0,
+   "c": "prod",
+   "s": "hecho",
+   "p": 100,
+   "t": "Ideas del creador integradas",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": ""
+  },
+  {
+   "id": "h0-proto",
+   "h": 0,
+   "c": "tec",
+   "s": "hecho",
+   "p": 100,
+   "t": "Prototipo anterior descartado",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": ""
+  },
+  {
+   "id": "h0-pc",
+   "h": 0,
+   "c": "tec",
+   "s": "hecho",
+   "p": 100,
+   "t": "Equipo y forma de trabajo",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": ""
+  },
+  {
+   "id": "h0-caso",
+   "h": 0,
+   "c": "narr",
+   "s": "hecho",
+   "p": 100,
+   "t": "Historia principal: El forastero",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": ""
+  },
+  {
+   "id": "h0-caso1",
+   "h": 0,
+   "c": "narr",
+   "s": "hecho",
+   "p": 100,
+   "t": "Caso 1 diseñado: El vecino de enfrente",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h0-caso"
+   ]
+  },
+  {
+   "id": "h0-dec",
+   "h": 0,
+   "c": "prod",
+   "s": "hecho",
+   "p": 100,
+   "t": "Aprobar las decisiones D01 a D30",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": ""
+  },
+  {
+   "id": "h1-setup",
+   "h": 1,
+   "c": "tec",
+   "s": "hecho",
+   "p": 100,
+   "t": "Preparar el PC de desarrollo",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": ""
+  },
+  {
+   "id": "h1-fichas",
+   "h": 1,
+   "c": "pers",
+   "s": "en_curso",
+   "p": 90,
+   "t": "Fichas de Agnes y Big Ed en datos",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h1-setup"
+   ]
+  },
+  {
+   "id": "h1-banco",
+   "h": 1,
+   "c": "conv",
+   "s": "en_curso",
+   "p": 70,
+   "t": "Banco de pruebas de conversación",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h1-setup"
+   ],
+   "span": [
+    1,
+    4
+   ]
+  },
+  {
+   "id": "h1-arq",
+   "h": 1,
+   "c": "conv",
+   "s": "planificado",
+   "p": 0,
+   "t": "Conversación en tres niveles",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h1-banco",
+    "h1-fichas"
+   ]
+  },
+  {
+   "id": "h1-modelos",
+   "h": 1,
+   "c": "conv",
+   "s": "planificado",
+   "p": 0,
+   "t": "Elegir el modelo de IA",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h1-arq"
+   ]
+  },
+  {
+   "id": "h1-corpus",
+   "h": 1,
+   "c": "tec",
+   "s": "planificado",
+   "p": 0,
+   "t": "Corpus de pruebas automatizado",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h1-banco"
+   ],
+   "span": [
+    1,
+    4
+   ]
+  },
+  {
+   "id": "h1-ciegas",
+   "h": 1,
+   "c": "prod",
+   "s": "planificado",
+   "p": 0,
+   "t": "Juicio a ciegas",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h1-modelos",
+    "h1-corpus"
+   ]
+  },
+  {
+   "id": "h1-voz",
+   "h": 1,
+   "c": "voz",
+   "s": "planificado",
+   "p": 0,
+   "t": "Prueba técnica de voz",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h1-banco"
+   ]
+  },
+  {
+   "id": "h2-unreal",
+   "h": 2,
+   "c": "tec",
+   "s": "en_curso",
+   "p": 50,
+   "t": "Proyecto Unreal nuevo",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h1-ciegas"
+   ]
+  },
+  {
+   "id": "h2-servicio",
+   "h": 2,
+   "c": "conv",
+   "s": "planificado",
+   "p": 0,
+   "t": "Conversación dentro de Unreal",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h2-unreal",
+    "h1-arq"
+   ]
+  },
+  {
+   "id": "h2-tarea",
+   "h": 2,
+   "c": "sist",
+   "s": "planificado",
+   "p": 0,
+   "t": "Agnes con su propia tarea",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h2-unreal"
+   ]
+  },
+  {
+   "id": "h2-paciencia",
+   "h": 2,
+   "c": "pers",
+   "s": "planificado",
+   "p": 0,
+   "t": "Paciencia y estado emocional",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h2-servicio"
+   ]
+  },
+  {
+   "id": "h2-libreta",
+   "h": 2,
+   "c": "inter",
+   "s": "planificado",
+   "p": 0,
+   "t": "Libreta de conversación",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h2-servicio"
+   ]
+  },
+  {
+   "id": "h2-reloj",
+   "h": 2,
+   "c": "sist",
+   "s": "planificado",
+   "p": 0,
+   "t": "Reloj del mundo y citas",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h2-unreal"
+   ]
+  },
+  {
+   "id": "h2-guardado",
+   "h": 2,
+   "c": "tec",
+   "s": "planificado",
+   "p": 0,
+   "t": "Guardado versionado",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h2-unreal"
+   ]
+  },
+  {
+   "id": "h3-mirador",
+   "h": 3,
+   "c": "mundo",
+   "s": "planificado",
+   "p": 0,
+   "t": "El comienzo en bloques",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h2-unreal"
+   ]
+  },
+  {
+   "id": "h3-vision",
+   "h": 3,
+   "c": "narr",
+   "s": "planificado",
+   "p": 0,
+   "t": "La semana del forastero",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h3-mirador"
+   ]
+  },
+  {
+   "id": "h3-crono",
+   "h": 3,
+   "c": "narr",
+   "s": "planificado",
+   "p": 0,
+   "t": "Cronología del suceso que lo cambia todo",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h3-vision",
+    "h0-caso1"
+   ]
+  },
+  {
+   "id": "h3-pruebas",
+   "h": 3,
+   "c": "narr",
+   "s": "planificado",
+   "p": 0,
+   "t": "Caso 1: cadena de pruebas con respaldos",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h3-crono"
+   ]
+  },
+  {
+   "id": "h3-reparto",
+   "h": 3,
+   "c": "pers",
+   "s": "planificado",
+   "p": 0,
+   "t": "Fichas del reparto principal",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h1-fichas"
+   ]
+  },
+  {
+   "id": "h3-despacho",
+   "h": 3,
+   "c": "mundo",
+   "s": "planificado",
+   "p": 0,
+   "t": "El despacho de Broadway",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h2-unreal"
+   ]
+  },
+  {
+   "id": "h3-historia",
+   "h": 3,
+   "c": "narr",
+   "s": "planificado",
+   "p": 0,
+   "t": "Verificaciones históricas",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": ""
+  },
+  {
+   "id": "h4-tablero",
+   "h": 4,
+   "c": "inter",
+   "s": "planificado",
+   "p": 0,
+   "t": "Tablero de conclusiones",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h3-pruebas"
+   ]
+  },
+  {
+   "id": "h4-confront",
+   "h": 4,
+   "c": "sist",
+   "s": "planificado",
+   "p": 0,
+   "t": "Confrontación",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h2-libreta"
+   ]
+  },
+  {
+   "id": "h4-informe",
+   "h": 4,
+   "c": "narr",
+   "s": "planificado",
+   "p": 0,
+   "t": "El prólogo de San Francisco",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": ""
+  },
+  {
+   "id": "h4-trabajo",
+   "h": 4,
+   "c": "sist",
+   "s": "planificado",
+   "p": 0,
+   "t": "La vida en Los Ángeles",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h3-vision"
+   ]
+  },
+  {
+   "id": "h4-licencia",
+   "h": 4,
+   "c": "narr",
+   "s": "planificado",
+   "p": 0,
+   "t": "La licencia y el despacho",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h4-trabajo"
+   ]
+  },
+  {
+   "id": "h4-caso1",
+   "h": 4,
+   "c": "narr",
+   "s": "planificado",
+   "p": 0,
+   "t": "Caso 1 jugable: El vecino de enfrente",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h0-caso1",
+    "h4-licencia"
+   ]
+  },
+  {
+   "id": "h4-social",
+   "h": 4,
+   "c": "pers",
+   "s": "planificado",
+   "p": 0,
+   "t": "Memoria social y opinión",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h2-paciencia"
+   ]
+  },
+  {
+   "id": "h4-procedural",
+   "h": 4,
+   "c": "pers",
+   "s": "planificado",
+   "p": 0,
+   "t": "Secundarios generados del barrio",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h3-reparto"
+   ]
+  },
+  {
+   "id": "h4-mapa",
+   "h": 4,
+   "c": "sist",
+   "s": "planificado",
+   "p": 0,
+   "t": "Mapa y transporte",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h2-reloj"
+   ]
+  },
+  {
+   "id": "h4-romance",
+   "h": 4,
+   "c": "pers",
+   "s": "por_decidir",
+   "p": 0,
+   "t": "Romance e intimidad",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h4-social"
+   ]
+  },
+  {
+   "id": "h4-arte",
+   "h": 4,
+   "c": "mundo",
+   "s": "planificado",
+   "p": 0,
+   "t": "Arte provisional y animación",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h3-mirador"
+   ]
+  },
+  {
+   "id": "h4-jugadores",
+   "h": 4,
+   "c": "prod",
+   "s": "planificado",
+   "p": 0,
+   "t": "Prueba con tres jugadores",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h4-informe",
+    "h4-arte"
+   ]
+  },
+  {
+   "id": "h4-movimiento",
+   "h": 4,
+   "c": "sist",
+   "s": "planificado",
+   "p": 0,
+   "t": "Movimiento fluido con peso",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h2-unreal"
+   ],
+   "span": [
+    2,
+    4
+   ]
+  },
+  {
+   "id": "h4-pelea",
+   "h": 4,
+   "c": "sist",
+   "s": "planificado",
+   "p": 0,
+   "t": "Pelea cuerpo a cuerpo",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h4-movimiento"
+   ],
+   "span": [
+    2,
+    4
+   ]
+  },
+  {
+   "id": "h4-combate",
+   "h": 4,
+   "c": "sist",
+   "s": "planificado",
+   "p": 0,
+   "t": "Coberturas y disparo",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h4-movimiento"
+   ]
+  },
+  {
+   "id": "h4-tabaco",
+   "h": 4,
+   "c": "sist",
+   "s": "planificado",
+   "p": 0,
+   "t": "Tabaco",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": ""
+  },
+  {
+   "id": "h5-instalador",
+   "h": 5,
+   "c": "tec",
+   "s": "planificado",
+   "p": 0,
+   "t": "Instalador sin internet",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h4-jugadores"
+   ]
+  },
+  {
+   "id": "h5-perfiles",
+   "h": 5,
+   "c": "tec",
+   "s": "planificado",
+   "p": 0,
+   "t": "Perfiles de hardware",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h1-modelos"
+   ]
+  },
+  {
+   "id": "h5-voz",
+   "h": 5,
+   "c": "voz",
+   "s": "planificado",
+   "p": 0,
+   "t": "Voces de los personajes",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h1-voz",
+    "h4-jugadores"
+   ]
+  },
+  {
+   "id": "h5-vozjugador",
+   "h": 5,
+   "c": "voz",
+   "s": "por_decidir",
+   "p": 0,
+   "t": "Hablar con micrófono",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h5-voz"
+   ]
+  },
+  {
+   "id": "h5-acces",
+   "h": 5,
+   "c": "inter",
+   "s": "planificado",
+   "p": 0,
+   "t": "Accesibilidad y ajustes",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": ""
+  },
+  {
+   "id": "h5-licencias",
+   "h": 5,
+   "c": "prod",
+   "s": "planificado",
+   "p": 0,
+   "t": "Licencias revisadas",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": ""
+  },
+  {
+   "id": "h6-c2",
+   "h": 6,
+   "c": "narr",
+   "s": "por_decidir",
+   "p": 0,
+   "t": "Caso 2 · El hombre que no quería volver",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h4-jugadores"
+   ]
+  },
+  {
+   "id": "h6-c3",
+   "h": 6,
+   "c": "narr",
+   "s": "por_decidir",
+   "p": 0,
+   "t": "Caso 3 · Las llaves de otra casa",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h4-jugadores"
+   ]
+  },
+  {
+   "id": "h6-c4",
+   "h": 6,
+   "c": "narr",
+   "s": "por_decidir",
+   "p": 0,
+   "t": "Caso 4 · Una voz en la radio",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h4-jugadores"
+   ]
+  },
+  {
+   "id": "h6-c5",
+   "h": 6,
+   "c": "narr",
+   "s": "por_decidir",
+   "p": 0,
+   "t": "Caso 5",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h4-jugadores"
+   ]
+  },
+  {
+   "id": "h6-mirador",
+   "h": 6,
+   "c": "narr",
+   "s": "por_decidir",
+   "p": 0,
+   "t": "Caso secundario · Una habitación sin nombre",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h4-jugadores"
+   ]
+  },
+  {
+   "id": "h6-policia",
+   "h": 6,
+   "c": "sist",
+   "s": "planificado",
+   "p": 0,
+   "t": "Crimen y policía con cinco estrellas",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h4-combate"
+   ]
+  },
+  {
+   "id": "h6-armeria",
+   "h": 6,
+   "c": "sist",
+   "s": "planificado",
+   "p": 0,
+   "t": "Tienda de armas y mercado negro",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h4-combate"
+   ]
+  },
+  {
+   "id": "h6-ciudad",
+   "h": 6,
+   "c": "mundo",
+   "s": "por_decidir",
+   "p": 0,
+   "t": "Ciudad por barrios",
+   "r": "",
+   "d": "",
+   "k": "",
+   "gdd": "",
+   "dep": [
+    "h4-procedural"
+   ]
+  }
+ ],
+ "novedades": [
+  {
+   "fecha": "2 oct 2026",
+   "titulo": "Hito 0 cerrado: el diseño, aprobado",
+   "puntos": []
+  },
+  {
+   "fecha": "2 oct 2026",
+   "titulo": "Decisiones D16 a D30, aprobadas",
+   "puntos": []
+  },
+  {
+   "fecha": "2 oct 2026",
+   "titulo": "El GDD oficial, en el proyecto",
+   "puntos": []
+  },
+  {
+   "fecha": "2 oct 2026",
+   "titulo": "Ya se puede hablar con Agnes y Big Ed",
+   "puntos": []
+  },
+  {
+   "fecha": "2 oct 2026",
+   "titulo": "Agnes y Big Ed, en datos",
+   "puntos": []
+  },
+  {
+   "fecha": "2 oct 2026",
+   "titulo": "Caso 1 diseñado: El vecino de enfrente",
+   "puntos": []
+  },
+  {
+   "fecha": "2 oct 2026",
+   "titulo": "La IA dice su primera frase",
+   "puntos": []
+  },
+  {
+   "fecha": "1 oct 2026",
+   "titulo": "El forastero: nueva historia principal",
+   "puntos": []
+  },
+  {
+   "fecha": "1 oct 2026",
+   "titulo": "La pelea, lo primero",
+   "puntos": []
+  },
+  {
+   "fecha": "1 oct 2026",
+   "titulo": "Nuevo caso 1 y acción",
+   "puntos": []
+  },
+  {
+   "fecha": "30 sep 2026",
+   "titulo": "Claude ya controla Unreal",
+   "puntos": []
+  },
+  {
+   "fecha": "30 sep 2026",
+   "titulo": "Git listo y vía oficial de Unreal 5.8",
+   "puntos": []
+  },
+  {
+   "fecha": "30 sep 2026",
+   "titulo": "Proyecto de Unreal creado",
+   "puntos": []
+  },
+  {
+   "fecha": "29 sep 2026",
+   "titulo": "La hoja de ruta, en cine negro",
+   "puntos": []
+  },
+  {
+   "fecha": "29 sep 2026",
+   "titulo": "Hoja de ruta publicada",
+   "puntos": []
+  },
+  {
+   "fecha": "29 sep 2026",
+   "titulo": "Voz de los personajes y anexos nuevos",
+   "puntos": []
+  },
+  {
+   "fecha": "29 sep 2026",
+   "titulo": "Empezamos de cero",
+   "puntos": []
+  },
+  {
+   "fecha": "29 sep 2026",
+   "titulo": "Una ciudad que recuerda",
+   "puntos": []
+  },
+  {
+   "fecha": "28 sep 2026",
+   "titulo": "Ideas del creador",
+   "puntos": []
+  },
+  {
+   "fecha": "28 sep 2026",
+   "titulo": "GDD 0.2",
+   "puntos": []
+  },
+  {
+   "fecha": "27 sep 2026",
+   "titulo": "Revisión del GDD 0.1",
+   "puntos": []
+  }
+ ]
+};
+</script>
+
+<script>
+(function(){
+const R = ROADMAP;
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const CAT = Object.fromEntries(R.categorias.map(c => [c.id, c]));
+const ITEM = Object.fromEntries(R.items.map(i => [i.id, i]));
+const ST = {hecho:"Hecho", en_curso:"En curso", planificado:"Planificado", por_decidir:"Por decidir"};
+const stamp = s => `<span class="stamp s-${s}">${ST[s]}</span>`;
+
+// Estado de cada hito, calculado a partir de sus entregables
+function hitoInfo(h){
+  const its = R.items.filter(i => i.h === h.id);
+  const pct = its.length ? Math.round(its.reduce((a,i)=>a+(i.s==="hecho"?100:(i.p||0)),0)/its.length) : 0;
+  return {its, pct, done: its.length>0 && its.every(i=>i.s==="hecho")};
+}
+const infos = R.hitos.map(hitoInfo);
+let currentIdx = infos.findIndex(x => !x.done); if (currentIdx < 0) currentIdx = R.hitos.length-1;
+const stopState = i => i < currentIdx ? "done" : i === currentIdx ? "current" : "future";
+const stopText = i => i < currentIdx ? "Completado" : i === currentIdx ? `${infos[i].pct} % hecho` : (i === currentIdx+1 ? "Siguiente" : "Más adelante");
+
+$("#updated").textContent = "Actualizado el " + R.actualizado;
+
+// ---------- Navegación ----------
+const views = ["estado","hitos","seguimiento","novedades"];
+function show(v){
+  if (!views.includes(v)) v = "estado";
+  views.forEach(x => { $("#view-"+x).hidden = x !== v; });
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.view === v ? "true" : "false"));
+  try { sessionStorage.setItem("rd-view", v); } catch(e){}
+}
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => { location.hash = t.dataset.view; }));
+function route(){
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (h.startsWith("item-")) { const id = h.slice(5); if (ITEM[id]) { openItem(id, false); return; } }
+  closeItem(false);
+  show(h || (()=>{ try { return sessionStorage.getItem("rd-view"); } catch(e){ return null; } })() || "estado");
+}
+window.addEventListener("hashchange", route);
+
+// ---------- Línea de tranvía ----------
+const tramSVG = `<svg viewBox="0 0 86 46" class="tram" aria-hidden="true" id="tram">
+  <path d="M30 6 L43 1 L56 6" fill="none" stroke="var(--silver)" stroke-width="1.6"/>
+  <rect x="6" y="8" width="74" height="26" rx="6" fill="var(--red)"/>
+  <rect x="6" y="26" width="74" height="3" fill="#1b1917" opacity=".55"/>
+  <rect x="12" y="12" width="10" height="10" rx="1.5" fill="#f6e3b0"/><rect x="26" y="12" width="10" height="10" rx="1.5" fill="#f6e3b0"/>
+  <rect x="40" y="12" width="10" height="10" rx="1.5" fill="#f6e3b0"/><rect x="54" y="12" width="10" height="10" rx="1.5" fill="#f6e3b0"/>
+  <rect x="68" y="12" width="8" height="10" rx="1.5" fill="#f6e3b0"/>
+  <circle cx="22" cy="37" r="4" fill="var(--silver)"/><circle cx="64" cy="37" r="4" fill="var(--silver)"/>
+</svg><span class="tram-label" id="tram-label">Aquí estamos</span>`;
+function renderRoute(){
+  $("#route").innerHTML = tramSVG + `<ol>${R.hitos.map((h,i)=>`
+    <li class="stop ${stopState(i)}"><button data-h="${h.id}" aria-label="Hito ${h.id}: ${esc(h.nombre)}. ${stopText(i)}">
+      <span class="dot"></span>
+      <span class="txt"><span class="code">Hito ${h.id}</span> <span class="name">${esc(h.corto)}</span> <span class="st">${stopText(i)}</span></span>
+    </button></li>`).join("")}</ol>`;
+  document.querySelectorAll(".stop button").forEach(b => b.addEventListener("click", () => goHito(+b.dataset.h)));
+  const place = (from) => {
+    const pos = ((from + .5) / R.hitos.length * 100) + "%";
+    $("#tram").style.left = pos; $("#tram-label").style.left = pos;
+  };
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) place(currentIdx); else { place(-0.6); requestAnimationFrame(()=>requestAnimationFrame(()=>place(currentIdx))); }
+}
+function goHito(h){
+  location.hash = "hitos";
+  setTimeout(()=>{ const col = document.getElementById("col-"+h); if (col) col.scrollIntoView({behavior:"smooth", inline:"start", block:"nearest"}); }, 30);
+}
+
+// ---------- Estado ----------
+function todoList(its){
+  return `<ul class="todo">${its.map(i=>`<li><button data-item="${i.id}">${stamp(i.s)}<span class="t">${esc(i.t)}</span></button></li>`).join("")}</ul>`;
+}
+function renderEstado(){
+  const h = R.hitos[currentIdx], inf = infos[currentIdx];
+  const pending = inf.its.filter(i => i.s !== "hecho"), done = inf.its.filter(i => i.s === "hecho");
+  $("#now-panel").innerHTML = `
+    <div class="kicker">Estamos en el hito ${h.id}</div>
+    <h2>${esc(h.nombre)}</h2>
+    <p style="margin:4px 0 0">${esc(h.meta)}</p>
+    <div class="meter" role="progressbar" aria-valuenow="${inf.pct}" aria-valuemin="0" aria-valuemax="100"><i style="width:${inf.pct}%"></i></div>
+    <div class="meter-txt">${inf.pct} % del hito · ${done.length} de ${inf.its.length} entregables terminados</div>
+    <div class="gate"><b>Para pasar a la siguiente parada</b>${esc(h.puerta)}</div>
+    ${pending.length ? `<h3>Lo que falta</h3>${todoList(pending)}` : ""}
+    ${done.length ? `<h3>Ya terminado</h3>${todoList(done)}` : ""}`;
+  const nx = R.hitos[currentIdx+1];
+  if (nx){
+    const ni = infos[currentIdx+1];
+    $("#next-panel").innerHTML = `<div class="kicker">Siguiente parada</div><h2>Hito ${nx.id} · ${esc(nx.nombre)}</h2>
+      <p style="margin:4px 0 0">${esc(nx.meta)}</p>${todoList(ni.its.slice(0,5))}
+      <p style="margin:12px 0 0"><button class="linkbtn" data-goto="${nx.id}">Ver todo el hito ${nx.id}</button></p>`;
+  } else $("#next-panel").innerHTML = `<h2>Última parada</h2><p>No quedan hitos por delante.</p>`;
+  const n = R.novedades[0];
+  $("#news-mini").innerHTML = `<div class="kicker">Último cambio</div><time>${esc(n.fecha)}</time><h2 style="font-size:24px;margin-top:2px">${esc(n.titulo)}</h2>
+    <p style="margin-top:10px"><button class="linkbtn" data-view-go="novedades">Ver todas las novedades</button></p>`;
+  const tot = R.items.length, c = s => R.items.filter(i=>i.s===s).length;
+  $("#totals").innerHTML = `En total hay <strong>${tot}</strong> entregables: ${c("hecho")} hechos, ${c("en_curso")} en curso, ${c("planificado")} planificados y ${c("por_decidir")} por decidir.`;
+  const leg = Object.keys(ST).map(s=>`<span>${stamp(s)}</span>`).join("") ;
+  $("#legend").innerHTML = leg;
+  $("#legend2").innerHTML = leg;
+  document.querySelectorAll("#view-estado [data-item]").forEach(b => b.addEventListener("click", () => location.hash = "item-"+b.dataset.item));
+  document.querySelectorAll("[data-goto]").forEach(b => b.addEventListener("click", () => goHito(+b.dataset.goto)));
+  document.querySelectorAll("[data-view-go]").forEach(b => b.addEventListener("click", () => location.hash = b.dataset.viewGo));
+}
+
+// ---------- Por hitos ----------
+const F = {cats:new Set(), sts:new Set(), q:""};
+function renderFilters(){
+  $("#f-cat").innerHTML = R.categorias.map(c=>`<button class="chip" aria-pressed="false" data-cat="${c.id}"><i class="sw" style="background:${c.color}"></i>${esc(c.nombre)}</button>`).join("");
+  $("#f-st").innerHTML = Object.entries(ST).map(([k,v])=>`<button class="chip" aria-pressed="false" data-st="${k}">${v}</button>`).join("");
+  document.querySelectorAll("#f-cat .chip").forEach(b=>b.addEventListener("click",()=>{toggle(F.cats,b.dataset.cat,b);renderBoard();}));
+  document.querySelectorAll("#f-st .chip").forEach(b=>b.addEventListener("click",()=>{toggle(F.sts,b.dataset.st,b);renderBoard();}));
+  $("#f-q").addEventListener("input", e => { F.q = e.target.value.trim().toLowerCase(); renderBoard(); });
+  $("#f-reset").addEventListener("click", () => { F.cats.clear(); F.sts.clear(); F.q=""; $("#f-q").value=""; document.querySelectorAll(".toolbar .chip").forEach(b=>b.setAttribute("aria-pressed","false")); renderBoard(); });
+}
+function toggle(set,k,b){ set.has(k)?set.delete(k):set.add(k); b.setAttribute("aria-pressed", set.has(k)?"true":"false"); }
+const pass = i => (!F.cats.size||F.cats.has(i.c)) && (!F.sts.size||F.sts.has(i.s)) && (!F.q || (i.t+" "+i.r+" "+i.d).toLowerCase().includes(F.q));
+function card(i){
+  const c = CAT[i.c];
+  return `<button class="card" style="--cat:${c.color}" data-item="${i.id}" aria-label="${esc(i.t)}, ${ST[i.s]}">
+    <span class="ct">${esc(i.t)}</span><span class="cs">${esc(i.r)}</span>
+    <span class="cf">${stamp(i.s)}${i.s==="en_curso"?`<span class="mini"><i style="width:${i.p}%"></i></span><span class="pct">${i.p} %</span>`:""}</span></button>`;
+}
+function renderBoard(){
+  const vis = R.items.filter(pass);
+  $("#f-count").textContent = (F.cats.size||F.sts.size||F.q) ? `Mostrando ${vis.length} de ${R.items.length} entregables.` : "";
+  $("#board").innerHTML = R.hitos.map((h,idx)=>{
+    const its = vis.filter(i=>i.h===h.id), inf = infos[idx];
+    const groups = R.categorias.map(c=>({c, its:its.filter(i=>i.c===c.id)})).filter(g=>g.its.length);
+    return `<section class="col ${idx===currentIdx?"current":""}" id="col-${h.id}" aria-label="Hito ${h.id}">
+      <div class="col-head"><div class="code">Hito ${h.id}${idx===currentIdx?" · aquí estamos":""}</div><h2>${esc(h.nombre)}</h2>
+        <p>${esc(h.meta)}</p><div class="meter"><i style="width:${inf.pct}%"></i></div><p>${inf.pct} % · ${inf.its.length} entregables</p></div>
+      <div class="col-body">${groups.length ? groups.map(g=>`<div class="grp"><i class="sw" style="background:${g.c.color}"></i>${esc(g.c.nombre)}</div>${g.its.map(card).join("")}`).join("") : `<p class="empty">Nada coincide con los filtros en este hito.</p>`}</div>
+    </section>`;
+  }).join("");
+  document.querySelectorAll("#board [data-item]").forEach(b=>b.addEventListener("click",()=>location.hash="item-"+b.dataset.item));
+}
+
+// ---------- Seguimiento ----------
+let segMode = "items";
+function renderGantt(){
+  const cols = R.hitos.length;
+  let html = `<div class="gh" style="grid-row:1;grid-column:1">${segMode==="items"?"Entregable":"Área"}</div>` + R.hitos.map((h,i)=>`<div class="gh ${i===currentIdx?"cur":""}" style="grid-row:1;grid-column:${i+2}">Hito ${h.id}<small>${esc(h.corto)}</small></div>`).join("");
+  const cells = (row) => R.hitos.map((h,i)=>`<div class="gc ${i===currentIdx?"cur":""}" style="grid-row:${row};grid-column:${i+2}"></div>`).join("");
+  let row = 2;
+  if (segMode === "items"){
+    R.categorias.forEach(c=>{
+      const its = R.items.filter(i=>i.c===c.id).sort((a,b)=>a.h-b.h);
+      if (!its.length) return;
+      html += `<div class="gcat" style="grid-row:${row}"><i class="sw" style="background:${c.color}"></i>${esc(c.nombre)}</div>`; row++;
+      its.forEach(i=>{
+        const [a,b] = i.span || [i.h,i.h];
+        html += `<div class="gl" style="grid-row:${row};grid-column:1"><button data-item="${i.id}">${esc(i.t)}</button></div>` + cells(row) +
+          `<button class="bar ${i.s}" style="grid-row:${row};grid-column:${a+2} / ${b+3};--p:${i.p}%" data-item="${i.id}" title="${esc(i.t)} · ${ST[i.s]}">${i.s==="en_curso"?i.p+" %":ST[i.s]}</button>`;
+        row++;
+      });
+    });
+  } else {
+    R.categorias.forEach(c=>{
+      html += `<div class="gl" style="grid-row:${row};grid-column:1"><i class="sw" style="background:${c.color}"></i><strong>${esc(c.nombre)}</strong></div>` + cells(row);
+      R.hitos.forEach(h=>{
+        const its = R.items.filter(i=>i.c===c.id && i.h===h.id);
+        if (its.length) html += `<div class="area-cell" style="grid-row:${row};grid-column:${h.id+2}" title="${its.map(i=>esc(i.t)).join(', ')}">${its.map(i=>`<span class="pip ${i.s}"></span>`).join("")}<span class="area-n">${its.length}</span></div>`;
+      });
+      row++;
+    });
+  }
+  $("#gantt").innerHTML = html;
+  document.querySelectorAll("#gantt [data-item]").forEach(b=>b.addEventListener("click",()=>location.hash="item-"+b.dataset.item));
+}
+document.querySelectorAll(".seg-toggle button").forEach(b=>b.addEventListener("click",()=>{
+  segMode = b.dataset.mode;
+  document.querySelectorAll(".seg-toggle button").forEach(x=>x.setAttribute("aria-pressed", x===b?"true":"false"));
+  renderGantt();
+}));
+
+// ---------- Novedades ----------
+function renderNews(){
+  $("#news").innerHTML = R.novedades.map(n=>`<article class="entry"><time>${esc(n.fecha)}</time><div><h2>${esc(n.titulo)}</h2><ul>${n.puntos.map(p=>`<li>${esc(p)}</li>`).join("")}</ul></div></article>`).join("");
+}
+
+// ---------- Ficha de detalle ----------
+let lastFocus = null, prevView = "hitos";
+function openItem(id, push=true){
+  const i = ITEM[id]; if (!i) return;
+  const c = CAT[i.c], h = R.hitos[i.h];
+  const deps = (i.dep||[]).filter(d=>ITEM[d]);
+  const needed = R.items.filter(x => (x.dep||[]).includes(i.id));
+  const visible = views.find(v => !$("#view-"+v).hidden);
+  if (visible) prevView = visible; else show(prevView);
+  lastFocus = document.activeElement;
+  const d = $("#drawer");
+  d.style.setProperty("--cat", c.color);
+  d.innerHTML = `<button class="close" id="d-close">Cerrar</button>
+    <span class="tabcat"><i></i>${esc(c.nombre)}</span>
+    <h2 id="d-title">${esc(i.t)}</h2>
+    <span class="stamp stamp-big s-${i.s}">${ST[i.s]}</span>
+    <div class="row"><span>Hito ${h.id} · ${esc(h.nombre)}</span>${i.span?`<span>Se trabaja del hito ${i.span[0]} al ${i.span[1]}</span>`:""}</div>
+    ${i.s!=="por_decidir"?`<div class="meter" role="progressbar" aria-valuenow="${i.p}" aria-valuemin="0" aria-valuemax="100"><i style="width:${i.s==="hecho"?100:i.p}%"></i></div><div class="row">${i.s==="hecho"?100:i.p} % completado</div>`:""}
+    ${deps.length?`<h3>Necesita antes</h3><ul class="deps">${deps.map(x=>`<li><button data-item="${x}">${esc(ITEM[x].t)}</button> <span class="stamp s-${ITEM[x].s}" style="font-size:11px">${ST[ITEM[x].s]}</span></li>`).join("")}</ul>`:""}
+    ${needed.length?`<h3>Desbloquea</h3><ul class="deps">${needed.map(x=>`<li><button data-item="${x.id}">${esc(x.t)}</button></li>`).join("")}</ul>`:""}`;
+  d.hidden = false; $("#scrim").hidden = false;
+  d.querySelectorAll("[data-item]").forEach(b=>b.addEventListener("click",()=>location.hash="item-"+b.dataset.item));
+  $("#d-close").addEventListener("click", ()=> history.length > 1 ? (location.hash = prevView) : closeItem());
+  $("#d-close").focus();
+}
+function closeItem(){
+  const d = $("#drawer"); if (d.hidden) return;
+  d.hidden = true; $("#scrim").hidden = true;
+  if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+}
+$("#scrim").addEventListener("click", ()=> location.hash = prevView);
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && !$("#drawer").hidden) { location.hash = prevView; }
+  if (e.key === "Tab" && !$("#drawer").hidden){
+    const f = [...$("#drawer").querySelectorAll("button")]; if (!f.length) return;
+    const first = f[0], last = f[f.length-1];
+    if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  }
+});
+
+// ---------- Arranque ----------
+renderRoute(); renderEstado(); renderFilters(); renderBoard(); renderGantt(); renderNews(); route();
+})();
+</script>
+</body>
+</html>
