@@ -327,7 +327,8 @@ $("#empezar").addEventListener("click", () => {
   guardar();
   pendientes = RONDA.respuestas.filter(x => !(x.id in guardadas));
   $("#inicio").hidden = true; $("#portada").hidden = true;
-  if (pendientes.length) { $("#juicio").hidden = false; mostrar(); } else { $("#final").hidden = false; }
+  // a judge who had finished and comes back (say, to send the notes again) goes straight to the button that sends them
+  if (pendientes.length) { $("#juicio").hidden = false; mostrar(); } else if (final.fin) { $("#fin").hidden = false; } else { $("#final").hidden = false; }
 });
 
 $("#siguiente").addEventListener("click", () => {
